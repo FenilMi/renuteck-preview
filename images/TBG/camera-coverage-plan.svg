@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 620" role="img"
+     aria-labelledby="ccp-title ccp-desc" width="760" height="620">
+  <title id="ccp-title">Where cameras go in a hotel property</title>
+  <desc id="ccp-desc">A plan of a property showing which camera type suits each
+    area: a fisheye covering the lobby, a bullet camera at the entrance, a
+    turret dome along the guest corridor, a glass dome in back of house, and a
+    PTZ covering the parking lot. All feed a recorder that can be viewed
+    remotely.</desc>
+
+  <defs>
+    <linearGradient id="ccp-cone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cc4a00" stop-opacity=".26"/>
+      <stop offset="100%" stop-color="#cc4a00" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="ccp-fisheye">
+      <stop offset="0%" stop-color="#cc4a00" stop-opacity=".24"/>
+      <stop offset="100%" stop-color="#cc4a00" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .bldg   { fill: #f4f6f8; stroke: #d3d9e0; stroke-width: 2; }
+      .room   { fill: #ffffff; stroke: #dde2e8; stroke-width: 1.5; }
+      .ground { fill: #eef1f4; stroke: #dde2e8; stroke-width: 1.5; }
+      .zone   { font: 600 12px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #868e99; letter-spacing: .6px; }
+      .cam    { font: 700 14px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #1d2b3a; }
+      .sub    { font: 400 12px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #6a727d; }
+      .dot    { fill: #cc4a00; }
+      .ring   { fill: none; stroke: #cc4a00; stroke-width: 2; }
+      .link   { fill: none; stroke: #c3cbd4; stroke-width: 1.5; stroke-dasharray: 4 5; }
+    </style>
+  </defs>
+
+  <!-- ── ground / parking ─────────────────────────────────────────── -->
+  <rect class="ground" x="16" y="408" width="728" height="196" rx="14"/>
+  <text class="zone" x="40" y="436">PARKING &amp; PERIMETER</text>
+  <g stroke="#dfe4ea" stroke-width="2">
+    <line x1="452" y1="474" x2="452" y2="578"/><line x1="524" y1="474" x2="524" y2="578"/>
+    <line x1="596" y1="474" x2="596" y2="578"/><line x1="668" y1="474" x2="668" y2="578"/>
+  </g>
+
+  <!-- ── building shell ───────────────────────────────────────────── -->
+  <rect class="bldg" x="16" y="16" width="728" height="376" rx="14"/>
+
+  <!-- lobby -->
+  <rect class="room" x="44" y="48" width="296" height="200" rx="10"/>
+  <text class="zone" x="64" y="76">LOBBY</text>
+
+  <!-- entrance -->
+  <rect class="room" x="366" y="48" width="196" height="200" rx="10"/>
+  <text class="zone" x="386" y="76">ENTRANCE</text>
+  <rect x="432" y="238" width="64" height="10" rx="5" fill="#cc4a00" opacity=".38"/>
+
+  <!-- recorder -->
+  <rect class="room" x="588" y="48" width="128" height="200" rx="10"/>
+  <text class="zone" x="606" y="76">RECORDER</text>
+  <rect x="608" y="94" width="88" height="13" rx="3" fill="#e3e8ed"/>
+  <rect x="608" y="115" width="88" height="13" rx="3" fill="#e3e8ed"/>
+  <rect x="608" y="136" width="88" height="13" rx="3" fill="#e3e8ed"/>
+  <circle cx="614" cy="170" r="4" class="dot"/>
+  <text class="sub" x="626" y="174">recording</text>
+  <text class="sub" x="606" y="204">viewed remotely</text>
+  <text class="sub" x="606" y="220">from a phone</text>
+
+  <!-- corridor -->
+  <rect class="room" x="44" y="272" width="452" height="88" rx="10"/>
+  <text class="zone" x="64" y="298">GUEST CORRIDOR</text>
+  <g stroke="#eaeef2" stroke-width="1.5">
+    <line x1="200" y1="310" x2="200" y2="360"/><line x1="292" y1="310" x2="292" y2="360"/>
+    <line x1="384" y1="310" x2="384" y2="360"/>
+  </g>
+
+  <!-- back of house -->
+  <rect class="room" x="524" y="272" width="192" height="88" rx="10"/>
+  <text class="zone" x="546" y="298">BACK OF HOUSE</text>
+
+  <!-- ── cameras ──────────────────────────────────────────────────── -->
+
+  <!-- fisheye, lobby -->
+  <circle cx="180" cy="146" r="94" fill="url(#ccp-fisheye)"/>
+  <circle cx="180" cy="146" r="9" class="dot"/>
+  <circle cx="180" cy="146" r="17" class="ring"/>
+  <text class="cam" x="180" y="192" text-anchor="middle">Fisheye</text>
+  <text class="sub" x="180" y="211" text-anchor="middle">one camera, whole room</text>
+
+  <!-- bullet, entrance -->
+  <path d="M464 106 L534 216 L394 216 Z" fill="url(#ccp-cone)"/>
+  <circle cx="464" cy="102" r="8" class="dot"/>
+  <text class="cam" x="464" y="150" text-anchor="middle">Bullet</text>
+  <text class="sub" x="464" y="169" text-anchor="middle">visible deterrent</text>
+
+  <!-- turret, corridor -->
+  <path d="M214 292 L296 356 L214 356 Z" fill="url(#ccp-cone)"/>
+  <circle cx="214" cy="290" r="7" class="dot"/>
+  <text class="cam" x="322" y="322">Turret dome</text>
+  <text class="sub" x="322" y="341">corridors, easy to aim</text>
+
+  <!-- glass dome, back of house -->
+  <circle cx="576" cy="322" r="40" fill="url(#ccp-fisheye)"/>
+  <circle cx="576" cy="322" r="7" class="dot"/>
+  <circle cx="576" cy="322" r="14" class="ring"/>
+  <text class="cam" x="620" y="322">Glass dome</text>
+  <text class="sub" x="620" y="341">discreet indoors</text>
+
+  <!-- ptz, parking -->
+  <path d="M150 476 L318 594 L28 594 Z" fill="url(#ccp-cone)"/>
+  <circle cx="150" cy="472" r="9" class="dot"/>
+  <circle cx="150" cy="472" r="18" class="ring"/>
+  <text class="cam" x="206" y="512">PTZ</text>
+  <text class="sub" x="206" y="531">pans across the lot</text>
+
+  <!-- ── feeds to the recorder ────────────────────────────────────── -->
+  <path class="link" d="M197 146 C 330 40, 470 34, 588 84"/>
+  <path class="link" d="M472 102 C 520 88, 552 84, 588 96"/>
+  <path class="link" d="M590 308 C 604 286, 620 268, 636 252"/>
+  <path class="link" d="M168 472 C 380 452, 540 400, 606 252"/>
+</svg>

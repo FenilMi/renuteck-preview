@@ -1,0 +1,1318 @@
+/* ============================================================
+   ReNu Teck — custom overrides & fixes
+   Loaded site-wide (replaces the missing demos/startup/startup.css)
+   ============================================================ */
+
+:root {
+  /* Brand accent — decorative use only (icons, rules, underlines).
+     White text on this is 3.06:1, which fails WCAG AA for text. */
+  --rt-orange: #ff5e03;
+  --rt-orange-dark: #d94e00;
+  /* Functional action colour — white text on this is 4.62:1 (passes AA). */
+  --rt-orange-action: #cc4a00;
+  --rt-orange-action-hover: #a83c00;
+  --rt-dark: #1d2b3a;
+  --rt-slate: #24384d;
+  --rt-text: #2a2d34;
+  /* Muted body/meta text. 5.82:1 on white — the theme default #7a7f87
+     measured 4.03:1 and failed AA for normal-size text. */
+  --rt-muted-text: #5d6672;
+}
+
+/* ---------- CTA / "Get a Quote" ----------
+   Solid fill using the accessible action colour so white label text
+   meets 4.5:1. Bright brand orange stays for decorative accents. */
+.btn.btn-quote,
+.header-button .btn-quote {
+  background-color: var(--rt-orange-action) !important;
+  border-color: var(--rt-orange-action) !important;
+  color: #fff !important;
+  transition: background-color .25s ease, border-color .25s ease, transform .15s ease;
+}
+.btn.btn-quote:hover,
+.btn.btn-quote:focus-visible,
+.header-button .btn-quote:hover {
+  background-color: var(--rt-orange-action-hover) !important;
+  border-color: var(--rt-orange-action-hover) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+}
+/* Theme's base-color buttons carry white text too — make them accessible */
+.btn.btn-base-color {
+  background-color: var(--rt-orange-action) !important;
+  border-color: var(--rt-orange-action) !important;
+  color: #fff !important;
+}
+.btn.btn-base-color:hover,
+.btn.btn-base-color:focus-visible {
+  background-color: var(--rt-orange-action-hover) !important;
+  border-color: var(--rt-orange-action-hover) !important;
+  color: #fff !important;
+}
+
+/* ---------- Client Login button ---------- */
+.btn.btn-client-login,
+.header-button .btn-client-login {
+  background-color: transparent !important;
+  border: 2px solid rgba(255, 255, 255, .55) !important;
+  color: #fff !important;
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+}
+.btn.btn-client-login:hover,
+.header-button .btn-client-login:hover {
+  background-color: #fff !important;
+  border-color: #fff !important;
+  color: var(--rt-dark) !important;
+}
+/* The header bar is dark in every state (including sticky), so the
+   Client Login control must stay light. A previous rule set dark
+   text/border here, which made it invisible on the dark sticky bar. */
+header.sticky .btn.btn-client-login,
+header.sticky-active .btn.btn-client-login {
+  background-color: transparent !important;
+  border-color: rgba(255, 255, 255, .55) !important;
+  color: #fff !important;
+}
+header.sticky .btn.btn-client-login:hover,
+header.sticky-active .btn.btn-client-login:hover {
+  background-color: #fff !important;
+  border-color: #fff !important;
+  color: var(--rt-dark) !important;
+}
+.nav-client-login-mobile { display: none; }
+
+/* ---------- Hero rebuild ---------- */
+.rt-hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+/* Readability scrim so white text passes contrast on any banner */
+.rt-hero-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(15, 23, 32, .78) 0%, rgba(15, 23, 32, .55) 45%, rgba(15, 23, 32, .30) 100%);
+}
+.rt-hero-content { position: relative; z-index: 2; }
+.rt-hero-eyebrow {
+  display: inline-block;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #fff;
+  opacity: .92;
+  margin-bottom: 18px;
+}
+.rt-hero-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: var(--rt-orange);
+  vertical-align: middle;
+  margin-right: 12px;
+}
+.rt-hero-title {
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -1px;
+  font-size: clamp(2.1rem, 5vw, 4.25rem);
+  margin: 0 0 30px;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, .35);
+}
+.rt-hero-title { margin-bottom: 20px; }
+.rt-hero-sub {
+  color: rgba(255, 255, 255, .88);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+  max-width: 56ch;
+  margin: 0 0 32px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .35);
+}
+.rt-hero-cta .btn { margin: 6px 8px 6px 0; }
+
+@media (max-width: 575px) {
+  .rt-hero-title { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+  .rt-hero-eyebrow { font-size: 13px; }
+  .rt-hero-sub { font-size: .95rem; margin-bottom: 24px; }
+}
+
+/* ---------- Count-up stats (replaces fragile odometer) ---------- */
+.rt-counter {
+  display: inline-flex;
+  align-items: flex-end;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+  font-size: clamp(2.4rem, 5vw, 3.9rem);
+  color: var(--rt-text);
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 0;
+}
+.rt-counter .rt-counter-suffix { color: var(--rt-orange); }
+.rt-counter .text-highlight { z-index: -1; }
+
+/* ---------- Honeypot (spam trap) ----------
+   Must be hidden from people but still present in the DOM for bots.
+   Not display:none only, so naive bots still see a fillable field. */
+.rt-hp {
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ---------- Accessibility ---------- */
+/* Screen-reader-only label helper (in case theme lacks it) */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border: 0;
+}
+/* Visible keyboard focus for links, buttons and form controls */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--rt-orange-action) !important;
+  outline-offset: 2px !important;
+  /* Second ring in the opposite tone, so the indicator stays visible
+     whichever background it lands on. */
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.9) !important;
+  border-radius: 3px;
+}
+/* Inside the dark header the tones swap over. */
+header a:focus-visible,
+header button:focus-visible,
+header [role="button"]:focus-visible,
+header .btn:focus-visible {
+  outline-color: #ffffff !important;
+  box-shadow: 0 0 0 6px rgba(29, 43, 58, 0.9) !important;
+}
+/* ---------- Dropdown toggles ----------
+   The theme only shows these below 992px, so on desktop the menus opened on
+   hover alone and Tab skipped straight past them. They are real <button>
+   elements now (native Enter/Space activation) and visible at every width. */
+header .navbar-nav .rt-nav-toggle {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  min-height: 26px;
+  padding: 0;
+  margin-left: 2px;
+  background: none;
+  border: 0;
+  color: inherit;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+  opacity: .8;
+  transition: opacity .2s ease;
+}
+/* Bootstrap draws its own caret on .dropdown-toggle::after; we already render
+   a feather chevron, so suppress the duplicate. */
+header .navbar-nav .rt-nav-toggle::after {
+  display: none !important;
+}
+header .navbar-nav .rt-nav-toggle:hover,
+header .navbar-nav .rt-nav-toggle:focus-visible {
+  opacity: 1;
+}
+header .navbar-nav .rt-nav-toggle[aria-expanded="true"] {
+  transform: rotate(180deg);
+}
+/* Below the breakpoint the theme lays the menu out vertically; give the
+   control a proper touch target there. */
+@media (max-width: 991px) {
+  header .navbar-nav .rt-nav-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 17px;
+  }
+}
+/* Skip-to-content link */
+.rt-skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 10000;
+  background: var(--rt-dark);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 0 0 6px 0;
+}
+.rt-skip-link:focus {
+  left: 0;
+}
+
+/* ============================================================
+   Batch 4 — design polish & responsiveness
+   ============================================================ */
+
+/* Prevent any element from causing horizontal scroll on mobile
+   (fixes hero/icon clipping at screen edges) */
+html, body { max-width: 100%; overflow-x: hidden; }
+img { max-width: 100%; }
+
+/* ---------- Typography rhythm ---------- */
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+/* ---------- Header legibility (always readable) ----------
+   The template's header nav is bg-transparent and the theme's sticky
+   background does not fire reliably in this build, so over any light
+   section the white nav + light-grey logo disappear. Give the header a
+   solid dark bar at all times: translucent+blurred over the hero,
+   fully solid once scrolled. This keeps logo + nav readable everywhere. */
+header nav.navbar {
+  background-color: rgba(29, 43, 58, 0.92) !important;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color .3s ease;
+}
+header.sticky nav.navbar,
+header.sticky-active nav.navbar {
+  background-color: rgba(29, 43, 58, 0.985) !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.16);
+}
+/* Ensure nav links + phone number stay white on the dark bar in all states */
+header nav .nav-link,
+header nav .widget-text,
+header nav .widget-text a {
+  color: #fff !important;
+}
+header nav .nav-link:hover {
+  color: var(--rt-orange) !important;
+}
+
+/* ---------- Buttons: consistent motion & rounding ---------- */
+.btn.btn-rounded { border-radius: 6px; }
+.btn { transition: transform .15s ease, background-color .25s ease, border-color .25s ease, color .25s ease; }
+.btn-large:hover { transform: translateY(-2px); }
+
+/* Header action buttons: keep them on one line and tidy */
+.header-button .btn { white-space: nowrap; }
+@media (min-width: 992px) and (max-width: 1199px) {
+  .header-button .btn { padding-left: 12px; padding-right: 12px; font-size: 12px; }
+}
+
+/* ---------- Header layout: stop the phone number wrapping ----------
+   At 1440px the phone broke onto three lines ("972- / 999- / 4393")
+   because the action column was allowed to shrink. Give the action
+   group its natural width and prevent the number from breaking. */
+header .header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+header .header-icon .widget-text,
+header .header-icon .widget-text a {
+  white-space: nowrap;
+}
+header nav .container-fluid > .col-auto:last-child {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+  min-width: max-content;
+}
+header .header-button { flex: 0 0 auto; }
+
+/* Comfortable touch targets (was ~36px) */
+header .header-button .btn,
+header .rt-login-dropdown > .btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Trim the oversized header shell (was 160px: 30px brand padding above and
+   below a 100px logo). Take the height out of the PADDING, not the logo —
+   the logo is the brand and needs to stay legible. Result is ~96px desktop /
+   ~84px mobile with a 68px / 56px mark. */
+@media (min-width: 992px) {
+  header nav.navbar { padding-top: 6px !important; padding-bottom: 6px !important; }
+  header .navbar-brand {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+  /* The horizontal lockup is 4.1:1, so it is capped by width rather than
+     height or it would crowd the navigation. */
+  header .navbar-brand img { max-height: 48px; max-width: 200px; width: auto; }
+}
+/* Between the menu breakpoint and a roomy desktop the nav needs the space
+   back, so the lockup steps down rather than colliding with the first item. */
+@media (min-width: 992px) and (max-width: 1199px) {
+  header .navbar-brand img { max-height: 34px; max-width: 140px; }
+}
+@media (min-width: 1200px) and (max-width: 1399px) {
+  header .navbar-brand img { max-height: 41px; max-width: 170px; }
+}
+@media (max-width: 991px) {
+  header nav.navbar { padding-top: 6px !important; padding-bottom: 6px !important; }
+  header .navbar-brand {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+  header .navbar-brand img { max-height: 42px; max-width: 174px; width: auto; }
+}
+
+/* ---------- Reduced motion ----------
+   Essential content must be readable without animation. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-anime],
+  [data-fancy-text],
+  .rt-hero-content,
+  .rt-counter {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .circle-cursor,
+  .cursor-page-inner { display: none !important; }
+}
+
+/* ---------- Hero: framing & responsive stack ---------- */
+.rt-hero-cta .btn { min-width: 172px; }
+@media (max-width: 767px) {
+  .rt-hero-content { text-align: center; }
+  .rt-hero-cta { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .rt-hero-cta .btn { width: 100%; max-width: 320px; margin: 0; }
+  .rt-hero-eyebrow { margin-bottom: 12px; }
+}
+
+/* ---------- Section rhythm ---------- */
+@media (max-width: 575px) {
+  section { padding-top: 55px; padding-bottom: 55px; }
+}
+
+/* ---------- Counters: even spacing on small screens ---------- */
+@media (max-width: 767px) {
+  .counter-style-07 .col { margin-bottom: 30px; }
+}
+
+/* ---------- Testimonials: name + business/location line ---------- */
+.rt-review-name { line-height: 1.2; }
+.rt-review-meta:empty { display: none; }
+.rt-review-meta { color: #7a7f87; margin-top: 2px; }
+
+/* ---------- Service cards: gentle hover lift ---------- */
+.rotate-box-style-02 { transition: transform .2s ease; }
+.rotate-box-style-02:hover { transform: translateY(-4px); }
+
+/* ---------- Logo legibility on light backgrounds ----------
+   The PBX TOGO logo uses light-grey text that washes out on light/white
+   sections. A soft drop-shadow gives it a readable edge everywhere. */
+.navbar-brand img,
+.footer-logo img {
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.45));
+}
+/* On the dark sticky bar the logo reads well; keep a mild shadow */
+header.sticky .navbar-brand img,
+header.sticky-active .navbar-brand img {
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+}
+
+/* ---------- Client Login dropdown ---------- */
+.rt-login-dropdown { position: relative; }
+.rt-login-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  min-width: 250px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+  z-index: 1000;
+}
+/* Driven by an explicit open state (JS) so aria-expanded always matches
+   what is visible. Hover-only disclosure cannot be announced correctly. */
+.rt-login-dropdown.is-open .rt-login-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.rt-login-menu a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 6px;
+  color: var(--rt-dark) !important;
+  text-decoration: none;
+  line-height: 1.25;
+}
+.rt-login-menu a:hover { background: #f3f5f7; }
+.rt-login-menu a small { display: block; color: #7a7f87; font-size: 12px; }
+
+/* ---------- Trust markers band ---------- */
+.rt-trust-band {
+  background: var(--rt-slate);
+  border-top: 3px solid var(--rt-orange);
+  position: relative;
+  z-index: 2;
+}
+.rt-tech-band { position: relative; z-index: 2; }
+.rt-trust-markers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 38px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rt-trust-markers li {
+  color: #fff;
+  font-weight: 500;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.rt-trust-markers li i { color: var(--rt-orange); font-size: 18px; }
+.rt-trust-markers li a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.rt-trust-markers li a:hover { color: var(--rt-orange); }
+
+/* ---------- What we install and support ----------
+   Each capability is a linked tile: icon, name, one plain line of what it
+   actually is. Icons come from the theme's existing Feather font, so this
+   adds no new asset requests. */
+.rt-tech-band { background: #fff; }
+.rt-brands-title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8a9099;
+  margin-bottom: 10px;
+}
+.rt-tech-heading {
+  text-align: center;
+  color: var(--rt-dark);
+  font-weight: 700;
+  letter-spacing: -1px;
+  font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+  line-height: 1.15;
+  max-width: 20ch;
+  margin: 0 auto 44px;
+}
+
+.rt-tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rt-tech-grid li {
+  flex: 1 1 250px;
+  max-width: 300px;
+  display: flex;
+}
+.rt-tech-grid a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 26px 24px 24px;
+  background: #fff;
+  border: 1px solid #e6e9ec;
+  border-radius: 12px;
+  text-decoration: none;
+  /* the theme centres text in this container; these tiles read as left-aligned */
+  text-align: left;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.rt-tech-grid a:hover,
+.rt-tech-grid a:focus-visible {
+  border-color: #d5dae0;
+  box-shadow: 0 14px 32px rgba(17, 26, 36, .10);
+  transform: translateY(-3px);
+}
+
+.rt-tech-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  background: linear-gradient(135deg, #ffe8d8 0%, #ffd4b5 100%);
+  color: #8f3300;
+  font-size: 26px;
+  transition: background .2s ease, color .2s ease;
+}
+.rt-tech-grid a:hover .rt-tech-icon,
+.rt-tech-grid a:focus-visible .rt-tech-icon {
+  background: var(--rt-orange-action);
+  color: #fff;
+}
+
+.rt-tech-name {
+  display: block;
+  width: 100%;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -.3px;
+  color: var(--rt-dark);
+  margin-bottom: 7px;
+}
+.rt-tech-desc {
+  display: block;
+  width: 100%;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #5d6672;
+}
+
+@media (max-width: 575px) {
+  .rt-tech-grid { gap: 14px; }
+  .rt-tech-grid li { flex-basis: 100%; max-width: 420px; }
+  .rt-tech-grid a { padding: 20px; }
+  .rt-tech-heading { margin-bottom: 30px; }
+}
+
+/* ---------- Reviews heading ----------
+   The rating and count are read from the public Google listing; if they
+   change, update both here and the link target. */
+.rt-reviews-head { padding-bottom: 0; }
+.rt-reviews-title {
+  color: var(--rt-dark);
+  font-weight: 700;
+  letter-spacing: -1px;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  margin: 0 0 10px;
+}
+.rt-reviews-title a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.rt-reviews-title a:hover { color: var(--rt-orange-action); }
+.rt-reviews-score { color: var(--rt-orange-action); }
+.rt-reviews-stars { color: #f5a623; font-size: 20px; letter-spacing: 2px; }
+.rt-review-meta {
+  margin-top: 2px;
+  color: var(--rt-muted-text) !important;
+}
+/* Review body text: the theme grey is a marginal 4.61:1; pin it so a
+   later theme change cannot drop it below AA. */
+.review-style-05 p { color: var(--rt-muted-text); }
+
+/* ---------- Product pages: why this product suits you ----------
+   The product pages were spec sheets with no reason to care. This block
+   sits between the description and the specification list. */
+.rt-product-fit {
+  background: #f7f8fa;
+  border-left: 3px solid var(--rt-orange-action);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  margin: 26px 0 30px;
+}
+.rt-product-fit h3 {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -.2px;
+  color: var(--rt-dark);
+  margin: 0 0 8px;
+}
+.rt-product-fit p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #4d5663;
+  margin: 0;
+}
+@media (max-width: 575px) {
+  .rt-product-fit { padding: 16px 18px; }
+}
+
+/* ---------- Hotels page hero ----------
+   The heading used to be injected by JS via data-fancy-text, so a script
+   failure left the page with no h1 at all. It is real markup now. */
+.rt-hotel-hero { z-index: 2; }
+.rt-hotel-hero .rt-hotel-h1 {
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -1px;
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  margin: 0 0 18px;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, .35);
+}
+.rt-hotel-hero .rt-hotel-sub {
+  color: rgba(255, 255, 255, .9);
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  line-height: 1.6;
+  max-width: 56ch;
+  margin: 0 0 20px;
+}
+.rt-hotel-hero .rt-hotel-rating {
+  color: rgba(255, 255, 255, .85);
+  font-size: 15px;
+  margin: 0 0 28px;
+}
+.rt-hotel-rating a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.rt-hotel-stars { color: #ffb066; letter-spacing: 2px; margin-right: 6px; }
+.rt-hotel-cta .btn { margin: 6px 10px 6px 0; }
+@media (max-width: 767px) {
+  .rt-hotel-cta { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .rt-hotel-cta .btn { width: 100%; max-width: 320px; margin: 0; }
+}
+
+/* The theme sets xs-py-0 on this banner; the richer hero needs room. */
+@media (max-width: 767px) {
+  .rt-hotel-banner { padding-top: 40px !important; padding-bottom: 88px !important; }
+  .rt-hotel-banner .down-section { display: none; }
+  .rt-hotel-hero .rt-hotel-sub { font-size: .98rem; }
+  .rt-hotel-hero .rt-hotel-rating { font-size: 14px; margin-bottom: 22px; }
+}
+
+/* ---------- Hotels: what changing over involves ---------- */
+.rt-switch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 24px;
+  margin: 0 0 40px;
+  padding: 0;
+  list-style: none;
+}
+.rt-switch-grid li {
+  text-align: left;
+  background: #fff;
+  border: 1px solid #e6e9ec;
+  border-left: 3px solid var(--rt-orange-action);
+  border-radius: 0 10px 10px 0;
+  padding: 24px 26px;
+}
+.rt-switch-grid h3 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -.2px;
+  color: var(--rt-dark);
+  margin: 0 0 10px;
+}
+.rt-switch-grid p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--rt-muted-text);
+  margin: 0;
+}
+.rt-switch-cta { text-align: center; }
+.rt-switch-note {
+  display: block;
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--rt-muted-text);
+}
+
+/* ---------- Quote form: services ---------- */
+.rt-services {
+  text-align: left;
+  border: 1px solid #e2e7ec;
+  border-radius: 10px;
+  padding: 18px 20px 14px;
+  margin: 0;
+  background: #fbfcfd;
+}
+.rt-services legend {
+  float: none;
+  text-align: left;
+  width: auto;
+  padding: 0 6px;
+  margin-left: -6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rt-dark);
+}
+.rt-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px 22px;
+  margin-top: 10px;
+}
+.rt-services-grid label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: #3b444f;
+  cursor: pointer;
+  padding: 6px 0;
+  margin: 0;
+  min-height: 34px;
+}
+.rt-services-grid input[type="checkbox"] {
+  width: 19px;
+  height: 19px;
+  accent-color: var(--rt-orange-action);
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+@media (max-width: 575px) {
+  .rt-services { padding: 14px 14px 10px; }
+  .rt-services-grid { grid-template-columns: 1fr; gap: 4px; }
+  .rt-services-grid label { min-height: 44px; }
+}
+
+/* ---------- Equipment brand row ----------
+   Scrolls right to left. Swiper's loop mode needs more slides than we have
+   logos, so this is a CSS marquee instead: the track is two identical halves
+   and slides by exactly one half, which lands back on an identical frame. */
+.rt-brand-row { padding: 34px 0 !important; }
+.rt-marquee {
+  overflow: hidden;
+  /* Fade the logos out at both edges rather than clipping them mid-glyph. */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.rt-marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: rt-marquee 38s linear infinite;
+}
+.rt-marquee:hover .rt-marquee-track,
+.rt-marquee:focus-within .rt-marquee-track { animation-play-state: paused; }
+/* The spacing is a trailing margin, not a flex gap. With a gap the track
+   measures 2S + (2n-1)g, so translateX(-50%) lands g/2 short of where the
+   repeated half starts and the loop jumps by half a gap on every restart.
+   As a margin each item occupies exactly item+g and the halves match. */
+.rt-marquee-track li { flex: 0 0 auto; margin-right: 64px; }
+.rt-marquee-track img {
+  /* Capped on both axes with object-fit so a wide lockup (Grandstream is 7:1)
+     is balanced against a compact one rather than dominating the row. */
+  height: 38px;
+  width: auto;
+  max-width: 190px;
+  object-fit: contain;
+  opacity: .72;
+  transition: opacity .2s ease;
+}
+.rt-marquee-track img:hover { opacity: 1; }
+@keyframes rt-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (max-width: 575px) {
+  .rt-marquee-track li { margin-right: 34px; }
+  .rt-marquee-track img { height: 28px; max-width: 150px; }
+}
+/* Motion is decoration here; the logos still read fine standing still. */
+@media (prefers-reduced-motion: reduce) {
+  .rt-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+    justify-content: center;
+    gap: 26px 64px;
+  }
+  .rt-marquee-track li { margin-right: 0; }
+  /* The repeats exist only to make the loop seamless; standing still they
+     would just be the same three logos four times over. */
+  .rt-marquee-track li[aria-hidden="true"] { display: none; }
+  .rt-marquee { -webkit-mask-image: none; mask-image: none; }
+}
+
+/* ---------- Industry page intros ----------
+   Both industry pages went straight from the banner into product cards,
+   with nothing saying who the page is for or what the offer is. */
+.rt-industry-eyebrow {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--rt-orange-action);
+  margin-bottom: 12px;
+}
+.rt-industry-heading {
+  color: var(--rt-dark);
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+  margin: 0 auto 20px;
+  max-width: 22ch;
+}
+.rt-industry-lead {
+  font-size: 17px;
+  line-height: 1.65;
+  color: #4d5663;
+  max-width: 70ch;
+  margin: 0 auto;
+}
+@media (max-width: 575px) {
+  .rt-industry-lead { font-size: 15.5px; }
+}
+
+/* ---------- Camera types ----------
+   The five types actually installed, with the space each one suits. Sits
+   under the CCTV block; the theme centres text in this container, so the
+   alignment is set explicitly. */
+.rt-text-left { text-align: left; }
+
+.rt-cam-types {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  margin: 60px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.rt-cam-types li {
+  flex: 1 1 190px;
+  max-width: 240px;
+  text-align: left;
+  padding: 22px 20px;
+  border: 1px solid #e6e9ec;
+  border-radius: 12px;
+  background: #fff;
+}
+.rt-cam-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  background: #eef1f5;
+  color: var(--rt-slate);
+  font-size: 21px;
+}
+.rt-cam-name {
+  display: block;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--rt-dark);
+  margin-bottom: 5px;
+}
+.rt-cam-desc {
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #5d6672;
+}
+
+@media (max-width: 767px) {
+  .rt-cam-types { gap: 12px; margin-top: 40px; }
+  .rt-cam-types li { flex-basis: 100%; max-width: 420px; padding: 18px; }
+}
+
+/* ---------- Mid-page CTA band ---------- */
+.rt-cta-band {
+  background: linear-gradient(120deg, var(--rt-dark) 0%, var(--rt-slate) 100%);
+  padding: 55px 0;
+}
+@media (max-width: 575px) {
+  .rt-cta-band { padding: 40px 0; text-align: center; }
+  .rt-cta-band .btn { width: 100%; max-width: 320px; margin: 6px auto 0; }
+}
+
+/* ---------- Dropdown menu legibility ----------
+   The header is marked data-header-hover="dark", so the theme paints submenu
+   links white on hover — but the submenu panel itself is white, which made the
+   hovered item vanish completely (1.0:1 contrast). The resting state was no
+   better at 2.38:1. Repaint both for a light panel.
+
+   Desktop only: below the menu breakpoint the links sit inside the collapsed
+   navbar, which is dark (rgb(35,35,35)), where the theme's light grey is
+   correct and this dark text would be invisible. */
+@media (min-width: 992px) {
+header [data-header-hover="dark"] .navbar-nav .dropdown .dropdown-menu a,
+header [data-header-hover="dark"] .navbar-nav .dropdown-with-icon .dropdown-menu a,
+header [data-header-hover="dark"] .navbar-nav .dropdown-with-icon-style02 .dropdown-menu a,
+header [data-header-hover="dark"] .navbar-nav .simple-dropdown .dropdown-menu a {
+  color: #2f3944;
+}
+header [data-header-hover="dark"] .navbar-nav .dropdown .dropdown-menu a:hover,
+header [data-header-hover="dark"] .navbar-nav .dropdown .dropdown-menu a:focus,
+header [data-header-hover="dark"] .navbar-nav .dropdown-with-icon .dropdown-menu a:hover,
+header [data-header-hover="dark"] .navbar-nav .dropdown-with-icon .dropdown-menu a:focus,
+header [data-header-hover="dark"] .navbar-nav .dropdown-with-icon-style02 .dropdown-menu a:hover,
+header [data-header-hover="dark"] .navbar-nav .dropdown-with-icon-style02 .dropdown-menu a:focus,
+header [data-header-hover="dark"] .navbar-nav .dropdown-with-icon-style02 .dropdown-menu .dropdown:hover > a,
+header [data-header-hover="dark"] .navbar-nav .simple-dropdown .dropdown-menu a:hover,
+header [data-header-hover="dark"] .navbar-nav .simple-dropdown .dropdown-menu a:focus {
+  color: var(--rt-orange-action);
+}
+}
+
+/* Below the menu breakpoint the same links sit in the dark collapsed navbar,
+   where they resolved to #717580 on #232323 — 3.41:1, under the 4.5:1 minimum. */
+@media (max-width: 991px) {
+  header .navbar .navbar-nav .dropdown .dropdown-menu a,
+  header .navbar .navbar-nav .dropdown-with-icon-style02 .dropdown-menu a {
+    color: #b6bcc5;
+  }
+  header .navbar .navbar-nav .dropdown .dropdown-menu a:hover,
+  header .navbar .navbar-nav .dropdown .dropdown-menu a:focus,
+  header .navbar .navbar-nav .dropdown-with-icon-style02 .dropdown-menu a:hover,
+  header .navbar .navbar-nav .dropdown-with-icon-style02 .dropdown-menu a:focus {
+    color: #ff8a3d;
+  }
+}
+
+/* ---------- Photograph figures ---------- */
+.rt-hotel-shot { padding-top: 0 !important; padding-bottom: 54px !important; }
+.rt-figure { margin: 0; }
+/* The front-desk source is 1672px wide, so the figure is capped at 836px:
+   at that width a 2x display gets a full-resolution pixel for every screen
+   pixel. Raise the cap only when a higher-resolution original arrives. */
+.rt-figure-836 { max-width: 836px; margin-inline: auto; }
+.rt-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.rt-figure figcaption {
+  text-align: left;
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--rt-muted-text);
+  max-width: 62ch;
+}
+
+/* ---------- Hotel hero strap ----------
+   The hero was carrying an eyebrow, a headline, a long paragraph, a rating
+   line and two buttons, all over a photograph. The detail now sits in its own
+   band underneath, where it is easier to read and does not fight the image. */
+.rt-hotel-strap { padding-top: 0 !important; padding-bottom: 0 !important; }
+.rt-strap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 40px;
+  padding: 30px 0 34px;
+  border-bottom: 1px solid #e6e9ed;
+}
+.rt-strap-lead {
+  flex: 1 1 460px;
+  margin: 0;
+  text-align: left;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #47505c;
+}
+.rt-strap-proof {
+  flex: 0 1 auto;
+  margin: 0;
+  text-align: left;
+  font-size: 15px;
+  color: var(--rt-muted-text);
+  white-space: nowrap;
+}
+.rt-strap-proof .rt-hotel-stars { color: var(--rt-orange-action); letter-spacing: 1px; }
+.rt-strap-proof a { color: inherit; text-decoration: underline; }
+@media (max-width: 767px) {
+  .rt-strap { gap: 12px; padding: 24px 0 26px; }
+  .rt-strap-lead { font-size: 16px; text-align: center; }
+  .rt-strap-proof { text-align: center; }
+  .rt-strap-proof { white-space: normal; }
+}
+
+/* ---------- Hotel hero framing ----------
+   The banner is a 16:9 photograph shown with background-size: cover in a
+   fixed 580px band, so on a wide monitor only about half the picture was
+   visible and it read as heavily zoomed in. Scaling the height with the
+   viewport keeps far more of the frame, and centring the position keeps the
+   desk and phone in view rather than cropping to the ceiling. */
+@media (min-width: 992px) {
+  .rt-hotel-banner,
+  .rt-photo-banner {
+    min-height: clamp(560px, 46vw, 800px);
+    display: flex;
+    align-items: center;
+    background-position: center 22% !important;
+  }
+}
+
+/* ---------- Header fit between the menu breakpoint and a wide desktop ----------
+   The header content (logo + six nav items + phone + two buttons) was wider
+   than the viewport from 992px to about 1550px, pushing "Get a Quote" off the
+   right edge entirely — at 1024px only 25px of the 128px button was visible.
+   Nav links carry 20px of padding each side, 240px across the six items, so
+   tightening that reclaims the space without dropping a link or a button. */
+@media (min-width: 1200px) and (max-width: 1599px) {
+  header .navbar .navbar-nav > .nav-item > .nav-link {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+/* The phone number is markup-gated to Bootstrap's xxl (1400px), where its
+   109px still does not fit. Hold it back until 1500px, where it does. */
+@media (max-width: 1499px) {
+  header .header-icon > .d-none.d-xxl-inline-block { display: none !important; }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  header .navbar .navbar-nav > .nav-item > .nav-link {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    font-size: 15px;
+  }
+  /* The logo gives up a little more so nothing has to be dropped. */
+  header .navbar-brand img { max-height: 28px; max-width: 112px; }
+  header .rt-login-dropdown { margin-right: 4px !important; }
+  header .header-icon .header-button .btn { padding-left: 12px; padding-right: 12px; }
+}
+
+/* ---------- Camera types, now on the CCTV page ----------
+   The five-card row moved off the homepage, which now gives an overview and
+   links here for the detail. */
+.rt-cam-section { padding-bottom: 90px; }
+.rt-cam-heading {
+  text-align: left;
+  font-size: clamp(26px, 2.4vw, 34px);
+  font-weight: 700;
+  color: var(--dark-gray, #1d2b3a);
+  margin-bottom: 10px;
+}
+.rt-cam-intro {
+  text-align: left;
+  max-width: 62ch;
+  margin-bottom: 34px;
+  color: var(--rt-muted-text);
+}
+@media (max-width: 767px) {
+  .rt-cam-section { padding-bottom: 60px; }
+  .rt-cam-heading, .rt-cam-intro { text-align: center; }
+  .rt-cam-intro { margin-left: auto; margin-right: auto; }
+}
+
+/* ---------- Menu button tap target ----------
+   The bars themselves are 22x14px, well under the 44x44 minimum for a
+   comfortable tap. Padding grows the hit area without moving the icon. */
+header .navbar-toggler {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* ---------- Contact banner ----------
+   The photograph has the PBXTOGO wall logo centred in its upper third, which
+   a vertically centred heading ran straight into: measured overlaps of 24px
+   at 1024, 14px at 768 and 16px at 390. The heading is moved into the lower
+   band so it clears the logo at every width. */
+.rt-contact-banner { position: relative; }
+/* The lower band of the photograph is a busy desk, so the heading needs its
+   own scrim rather than relying on the theme's flat overlay. */
+.rt-contact-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 16, 24, 0) 0%,
+    rgba(10, 16, 24, 0.30) 42%,
+    rgba(10, 16, 24, 0.86) 74%,
+    rgba(10, 16, 24, 0.93) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.rt-contact-banner .container { position: relative; z-index: 2; }
+.rt-contact-banner .container {
+  display: flex;
+  align-items: flex-end;
+  min-height: inherit;
+}
+.rt-contact-banner .container > .row {
+  width: 100%;
+  padding-bottom: 84px;
+}
+/* A wider measure so the headline does not wrap into three short lines. */
+.rt-contact-banner .container > .row > [class*="col-"] {
+  max-width: 760px;
+  flex: 0 0 auto;
+  width: 100%;
+}
+@media (max-width: 991px) {
+  /* Below the menu breakpoint the banner was too short for the heading to sit
+     under the logo at all, so it needs the height as well as the alignment. */
+  .rt-contact-banner { min-height: clamp(430px, 78vw, 640px); }
+  .rt-contact-banner .container > .row { padding-bottom: 40px; }
+}
+
+/* ---------- About banner ----------
+   Its wall logo sits left of centre at mid height, so the heading is pushed
+   into the lower band with the same scrim treatment as the Contact banner. */
+.rt-about-banner { position: relative; }
+.rt-about-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 16, 24, 0) 0%,
+    rgba(10, 16, 24, 0.30) 42%,
+    rgba(10, 16, 24, 0.86) 74%,
+    rgba(10, 16, 24, 0.93) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.rt-about-banner .container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  min-height: inherit;
+}
+.rt-about-banner .container > .row {
+  width: 100%;
+  padding-bottom: 84px;
+}
+/* The logo is on the left of this photograph, so the heading sits to the
+   right of it rather than on top. 52% of the container always clears it:
+   measured 149px of daylight at 1440 and 114px at 1024. */
+@media (min-width: 992px) {
+  .rt-about-banner .container > .row > [class*="col-"] {
+    max-width: min(700px, 52%);
+    flex: 0 0 auto;
+    width: 100%;
+    margin-left: auto;
+    margin-right: 0;
+  }
+}
+@media (max-width: 991px) {
+  .rt-about-banner { min-height: clamp(430px, 78vw, 640px); }
+  .rt-about-banner .container > .row { padding-bottom: 40px; }
+  /* Too narrow to sit beside it, so the crop moves right and leaves the logo
+     off the frame instead. */
+  .rt-about-banner { background-position: 100% center !important; }
+}
+
+/* ---------- Flip-card text sharpness ----------
+   The theme keeps will-change: transform on every rotate-box, which holds the
+   card on its own GPU layer permanently and rasterises the text softly even
+   when nothing is animating. It is only needed while the card is flipping.
+   The theme also writes perspective: 1000 with no unit, which is invalid in
+   the unprefixed property, so the value is restated correctly. */
+.rotate-box {
+  will-change: auto;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+.rotate-box:hover,
+.rotate-box:focus-within {
+  will-change: transform;
+}
+
+/* ---------- Installation rack photo ----------
+   The column's only child was a decorative word; with that gone it needs its
+   own height or it collapses. The rack sits slightly left of centre in the
+   frame, so the crop is anchored at 44% to keep both edges of it in view. */
+.rt-rack-photo {
+  min-height: 560px;
+  background-position: 44% center !important;
+  background-repeat: no-repeat;
+}
+@media (max-width: 991px) {
+  .rt-rack-photo { min-height: 480px; }
+}
+@media (max-width: 575px) {
+  .rt-rack-photo { min-height: 420px; }
+}
+
+/* ---------- About banner eyebrow contrast ----------
+   The theme's .opacity-6 drops this small uppercase label to 60% white over a
+   photograph. Measured on the glyph pixels themselves it was 3.64:1 at 1440
+   and 3.24:1 at 1280 -- under AA. (Measuring the whole element box instead
+   samples empty space around centred text and reports a kinder number; it is
+   the glyph pixels that matter.)
+   Its computed opacity is also inconsistent: [data-anime].appear beats
+   .opacity-6 once the reveal has run, so the same label renders at 0.6 at
+   1280 and above, and at 1.0 below -- which is why only the wide widths
+   failed. Pin it to full white and give it the same shadow
+   the main heading carries. Size and weight still carry the hierarchy. */
+.rt-about-banner .page-title-extra-small h1.opacity-6 {
+  opacity: 1;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- Guest Room Phones hero ----------
+   The photograph is 2.385:1 and the telephone -- the whole point of the
+   picture -- sits at x 73-96%. A centred cover crop keeps it at wide widths
+   but throws it away as the viewport narrows: 66% of it survives at 1024,
+   16% at 768 and none at all at 390. So the focal point moves right as the
+   frame tightens, which also makes the instruction panel legible on a phone
+   instead of shrinking it. Percentages are the minimum that keep the phone's
+   right edge inside the frame at the narrow end of each range. */
+.rt-guestroom-banner {
+  position: relative;
+  min-height: clamp(560px, 46vw, 800px);
+  background-position: 60% center !important;
+}
+@media (max-width: 1199px) {
+  .rt-guestroom-banner { background-position: 88% center !important; }
+}
+@media (max-width: 991px) {
+  .rt-guestroom-banner {
+    min-height: clamp(430px, 78vw, 640px);
+    background-position: 95% center !important;
+  }
+}
+/* The room is warm and bright behind the centred heading, so the scrim is
+   weighted to the middle band where the text sits rather than the bottom. */
+.rt-guestroom-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 12, 18, 0.55) 0%,
+    rgba(8, 12, 18, 0.68) 38%,
+    rgba(8, 12, 18, 0.66) 62%,
+    rgba(8, 12, 18, 0.52) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.rt-guestroom-banner .container { position: relative; z-index: 2; }
+/* Same theme trap as the About banner: .opacity-6 drops this label under AA. */
+.rt-guestroom-banner .page-title-extra-small h1.opacity-6 {
+  opacity: 1;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+}

@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 620" role="img"
+     aria-labelledby="ps-title ps-desc" width="580" height="620">
+  <title id="ps-title">One team for phones, network and cameras</title>
+  <desc id="ps-desc">Illustration of a hotel building with three systems around
+    it — the phone system, the guest Wi-Fi network and the camera system — all
+    looked after by the same team.</desc>
+
+  <defs>
+    <linearGradient id="ps-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eef2f6"/>
+      <stop offset="100%" stop-color="#f7f8fa"/>
+    </linearGradient>
+    <linearGradient id="ps-wall" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#31445b"/>
+      <stop offset="55%" stop-color="#24374a"/>
+      <stop offset="100%" stop-color="#17222e"/>
+    </linearGradient>
+    <linearGradient id="ps-wifi" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cc4a00" stop-opacity=".30"/>
+      <stop offset="100%" stop-color="#cc4a00" stop-opacity="0"/>
+    </linearGradient>
+    <style>
+      .lbl   { font: 700 13px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #1d2b3a; }
+      .sub   { font: 400 12px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #6a727d; }
+      .badge { fill: #ffffff; stroke: #e2e7ec; stroke-width: 1.5; }
+      .ico   { fill: none; stroke: #cc4a00; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .tie   { fill: none; stroke: #c8d0d8; stroke-width: 1.5; stroke-dasharray: 3 5; }
+      .lit   { fill: #ffb066; }
+      .dark  { fill: #33455a; }
+    </style>
+  </defs>
+
+  <rect width="580" height="620" rx="14" fill="url(#ps-sky)"/>
+
+  <!-- ground -->
+  <ellipse cx="290" cy="536" rx="228" ry="26" fill="#e4e9ee"/>
+
+  <!-- building -->
+  <rect x="186" y="150" width="208" height="386" rx="6" fill="url(#ps-wall)"/>
+  <rect x="176" y="138" width="228" height="18" rx="5" fill="#2b3d51"/>
+
+  <!-- windows -->
+  <g>
+    <rect class="lit"  x="206" y="180" width="30" height="22" rx="3"/>
+    <rect class="dark" x="252" y="180" width="30" height="22" rx="3"/>
+    <rect class="lit"  x="298" y="180" width="30" height="22" rx="3"/>
+    <rect class="dark" x="344" y="180" width="30" height="22" rx="3"/>
+
+    <rect class="dark" x="206" y="222" width="30" height="22" rx="3"/>
+    <rect class="lit"  x="252" y="222" width="30" height="22" rx="3"/>
+    <rect class="dark" x="298" y="222" width="30" height="22" rx="3"/>
+    <rect class="lit"  x="344" y="222" width="30" height="22" rx="3"/>
+
+    <rect class="lit"  x="206" y="264" width="30" height="22" rx="3"/>
+    <rect class="dark" x="252" y="264" width="30" height="22" rx="3"/>
+    <rect class="dark" x="298" y="264" width="30" height="22" rx="3"/>
+    <rect class="lit"  x="344" y="264" width="30" height="22" rx="3"/>
+
+    <rect class="dark" x="206" y="306" width="30" height="22" rx="3"/>
+    <rect class="lit"  x="252" y="306" width="30" height="22" rx="3"/>
+    <rect class="lit"  x="298" y="306" width="30" height="22" rx="3"/>
+    <rect class="dark" x="344" y="306" width="30" height="22" rx="3"/>
+
+    <rect class="lit"  x="206" y="348" width="30" height="22" rx="3"/>
+    <rect class="dark" x="252" y="348" width="30" height="22" rx="3"/>
+    <rect class="lit"  x="298" y="348" width="30" height="22" rx="3"/>
+    <rect class="lit"  x="344" y="348" width="30" height="22" rx="3"/>
+
+    <rect class="dark" x="206" y="390" width="30" height="22" rx="3"/>
+    <rect class="dark" x="252" y="390" width="30" height="22" rx="3"/>
+    <rect class="lit"  x="298" y="390" width="30" height="22" rx="3"/>
+    <rect class="dark" x="344" y="390" width="30" height="22" rx="3"/>
+  </g>
+
+  <!-- entrance -->
+  <rect x="252" y="452" width="76" height="84" rx="4" fill="#0f1720"/>
+  <rect x="256" y="456" width="32" height="80" rx="3" fill="#243444"/>
+  <rect x="292" y="456" width="32" height="80" rx="3" fill="#243444"/>
+  <rect x="236" y="440" width="108" height="12" rx="4" fill="#cc4a00"/>
+
+  <!-- rooftop access point + wifi arcs -->
+  <rect x="278" y="122" width="24" height="12" rx="3" fill="#cc4a00"/>
+  <path d="M262 116 a40 40 0 0 1 56 0 L290 128 Z" fill="url(#ps-wifi)"/>
+  <g class="ico" opacity=".8">
+    <path d="M268 112 a32 32 0 0 1 44 0"/>
+    <path d="M276 102 a20 20 0 0 1 28 0"/>
+  </g>
+
+  <!-- wall camera with cone -->
+  <path d="M148 302 L84 384 L148 384 Z" fill="url(#ps-wifi)"/>
+  <rect x="146" y="286" width="42" height="22" rx="5" fill="#3a4d64"/>
+  <circle cx="155" cy="297" r="6.5" fill="#cc4a00"/>
+  <circle cx="155" cy="297" r="2.6" fill="#1d2b3a"/>
+  <rect x="186" y="291" width="10" height="12" rx="2" fill="#3a4d64"/>
+
+  <!-- badge: phones -->
+  <circle class="badge" cx="86" cy="196" r="34"/>
+  <g class="ico" transform="translate(72 182)">
+    <path d="M6 2 h5 l2 6 -3 2 a12 12 0 0 0 6 6 l2-3 6 2 v5 a2 2 0 0 1-2 2 A21 21 0 0 1 4 4 a2 2 0 0 1 2-2z"/>
+  </g>
+  <text class="lbl" x="86" y="252" text-anchor="middle">Phone system</text>
+
+  <!-- badge: network -->
+  <circle class="badge" cx="494" cy="238" r="34"/>
+  <g class="ico" transform="translate(480 226)">
+    <path d="M1 7 a19 19 0 0 1 26 0"/><path d="M6 13 a12 12 0 0 1 16 0"/><circle cx="14" cy="19" r="2.2" fill="#cc4a00" stroke="none"/>
+  </g>
+  <text class="lbl" x="494" y="294" text-anchor="middle">Guest Wi-Fi</text>
+
+  <!-- badge: cameras -->
+  <circle class="badge" cx="470" cy="412" r="34"/>
+  <g class="ico" transform="translate(455 400)">
+    <rect x="1" y="4" width="19" height="13" rx="3"/><path d="M20 9 l8-4 v13 l-8-4z"/>
+  </g>
+  <text class="lbl" x="470" y="468" text-anchor="middle">Cameras</text>
+
+  <!-- ties from each badge to the building -->
+  <path class="tie" d="M120 200 C 160 206, 176 240, 186 264"/>
+  <path class="tie" d="M460 240 C 430 236, 410 216, 394 200"/>
+  <path class="tie" d="M436 414 C 418 410, 404 400, 394 386"/>
+
+  <!-- caption -->
+  <text class="lbl" x="290" y="580" text-anchor="middle" style="font-size:15px">One team, one number to call</text>
+  <text class="sub" x="290" y="600" text-anchor="middle">Phones, network and cameras under one roof</text>
+</svg>
