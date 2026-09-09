@@ -9,4 +9,5 @@ and reviewed. It is not the live site.
 - The contact form is **disabled** here — a static host cannot run the PHP mail
   handler. Please call 972-999-4393 or email office@renuteck.net.
 
-Generated from the private source repository; do not edit these files by hand.
+Generated from the private source repository by `tools/build-static.py`.
+Do not edit these files by hand; they are overwritten on every rebuild.
