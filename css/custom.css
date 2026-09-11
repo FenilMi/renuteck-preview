@@ -516,7 +516,7 @@ header.sticky-active .navbar-brand img {
   letter-spacing: 1.5px;
   font-size: 13px;
   font-weight: 700;
-  color: #8a9099;
+  color: #68707c;   /* #8a9099 measured 3.22:1 on white; AA wants 4.5 at 13px */
   margin-bottom: 10px;
 }
 .rt-tech-heading {
@@ -1350,3 +1350,31 @@ header .navbar-toggler {
   opacity: 1;
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
 }
+
+/* ---------- Text contrast on body content ----------
+   Measured on glyph pixels against the real rendered background.
+
+   Brand orange as text is 3.06:1 on white. That is fine for the large
+   headings it also colours (large text needs 3:1) but under AA anywhere
+   body-sized, so it is darkened on light grounds. On the dark sections the
+   relationship inverts -- #ff5e03 gives 4.63:1 there and the darker orange
+   only 3.07 -- so the brand orange is kept wherever the ground is dark. */
+.text-base-color { color: #c44700; }
+[class*="bg-dark"] .text-base-color,
+.rt-banner-scrim .text-base-color,
+.rt-hero-slide .text-base-color,
+footer .text-base-color { color: #ff5e03; }
+
+/* The gold accent above "Our Services" / "What We Do" was 2.68:1 on white. */
+.text-crusoe-green { color: #946410; }
+
+/* Body grey was 4.30:1 on the off-white band -- just under. */
+:root { --medium-gray: #6a6e79; }
+
+/* The footer runs the opposite way: its grey was 3.83:1 on the dark ground,
+   so it has to get lighter, not darker. The theme paints both its paragraphs
+   and its navigation links from --aluminium-grey, so the variable is the one
+   place to change: overriding `.footer-dark a` directly would also capture the
+   white phone and email links, which are fine as they are. The variable's only
+   other use is a .bg-aluminium-grey utility this site never applies. */
+:root { --aluminium-grey: #979da6; }
