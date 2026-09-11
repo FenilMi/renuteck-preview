@@ -1244,16 +1244,25 @@ header .navbar-toggler {
    The column's only child was a decorative word; with that gone it needs its
    own height or it collapses. The rack sits slightly left of centre in the
    frame, so the crop is anchored at 44% to keep both edges of it in view. */
+/* The photograph is framed to the rack itself (0.554), so the container is
+   sized to roughly that ratio at every breakpoint -- otherwise `cover` starts
+   eating the rails or the top and bottom of the rack. The off-centre
+   background-position is gone with the old crop: the framed file is already
+   centred on the rack. */
 .rt-rack-photo {
   min-height: 560px;
-  background-position: 44% center !important;
+  background-position: center center !important;
   background-repeat: no-repeat;
 }
+@media (min-width: 992px) and (max-width: 1199px) {
+  /* the column is narrow here, so a tall box would crop the rails away */
+  .rt-rack-photo { min-height: 460px; }
+}
 @media (max-width: 991px) {
-  .rt-rack-photo { min-height: 480px; }
+  .rt-rack-photo { min-height: 560px; }
 }
 @media (max-width: 575px) {
-  .rt-rack-photo { min-height: 420px; }
+  .rt-rack-photo { min-height: 540px; }
 }
 
 /* ---------- About banner eyebrow contrast ----------
