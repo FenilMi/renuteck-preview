@@ -1316,3 +1316,37 @@ header .navbar-toggler {
   opacity: 1;
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
 }
+
+/* ---------- Banner text legibility ----------
+   The theme's page banners rely on a weak green wash (.bg-gradient-black-green
+   at .opacity-extra-medium), and some pages add a flat 60% black layer on top.
+   Neither adapts to the photograph underneath, so white heading text over a
+   bright image was unreadable: measured on glyph pixels, the small uppercase
+   eyebrow reached 1.08:1 on the PBX page and the 61px page title 1.95:1 on
+   CCTV. AA wants 4.5:1 for the eyebrow (17px/500) and 3:1 for the title
+   (61px/700).
+
+   One scrim, weighted to the middle band where the centred heading sits, over
+   every affected banner. Pages whose photograph is already dark enough
+   (Hotel-Industry, Contact) are deliberately left alone. */
+.rt-banner-scrim { position: relative; }
+.rt-banner-scrim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 12, 18, 0.62) 0%,
+    rgba(8, 12, 18, 0.74) 38%,
+    rgba(8, 12, 18, 0.72) 62%,
+    rgba(8, 12, 18, 0.58) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.rt-banner-scrim .container { position: relative; z-index: 2; }
+/* .opacity-6 halves the eyebrow's contrast on top of everything else. */
+.rt-banner-scrim .page-title-extra-small h1.opacity-6 {
+  opacity: 1;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+}
